@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "dev": "jest --watch",
     "test": "jest"
   },
   "devDependencies": {

@@ -9,43 +9,72 @@ type CompletionAndCreation = {
   creationDate: Date | null;
 };
 
-export class ToDoTxt {
+class Description {
+  body: string;
+  constructor(descriptionTxt: string) {
+    this.body = descriptionTxt;
+  }
+
+  getProjects() {
+    const projectPattern = new RegExp(/\+\S+/, "g");
+    return this.body.match(projectPattern)?.map((project) => {
+      return project.slice(1);
+    });
+  }
+
+  getContexts() {
+    const contextPattern = new RegExp(/\@\S+/, "g");
+    return this.body.match(contextPattern)?.map((context) => {
+      return context.slice(1);
+    });
+  }
+}
+
+export class ToDoText {
   rawText: string;
   isCompleted: boolean;
   priority: AtoZ | null;
   completionDate: Date | null;
   creationDate: Date | null;
+  description: Description;
 
   private constructor(
     rawText: string,
     isCompleted: boolean,
     priority: AtoZ | null,
     completionDate: Date | null,
-    creationDate: Date | null
+    creationDate: Date | null,
+    description: Description
   ) {
     this.rawText = rawText;
     this.isCompleted = isCompleted;
     this.priority = priority;
     this.completionDate = completionDate;
     this.creationDate = creationDate;
+    this.description = description;
   }
 
-  static parseToDoTxt(todoText: string): ToDoTxt {
+  static parseToDoTxt(todoText: string): ToDoText {
     const isCompleted = createCompleted(todoText);
     const priority = createPriority(todoText);
     const dateObj = createDateObj(todoText);
-    return new ToDoTxt(
+    const description = new Description(createDescription(todoText));
+    return new ToDoText(
       todoText,
       isCompleted,
       priority,
       dateObj.completionDate,
-      dateObj.creationDate
+      dateObj.creationDate,
+      description
     );
   }
 }
 
+const completedPattern = new RegExp(/^x /);
+const priorityPattern = new RegExp(/\([A-Z]\)/);
+const datePattern = new RegExp(/([1-2][0-9]{3}-[0-1][0-9]-[0-3][0-9])/, "g");
+
 function createCompleted(todoText: string): boolean {
-  const completedPattern = new RegExp("^x ");
   const matches = todoText.match(completedPattern);
   let result = false;
   if (matches !== null && matches.length == 1) {
@@ -55,18 +84,15 @@ function createCompleted(todoText: string): boolean {
 }
 
 function createPriority(todoText: string): string | null {
-  const priorityPattern = new RegExp("([A-Z])");
   const matches = todoText.match(priorityPattern);
   let result = null;
   if (matches !== null) {
-    result = matches[0];
+    result = matches[0][1];
   }
   return result;
 }
 
 function createDateObj(todoText: string): CompletionAndCreation {
-  const datePattern = new RegExp("([1-2][0-9]{3}-[0-1][0-9]-[0-3][0-9])", "g");
-
   const dateArray = todoText.match(datePattern);
   let completionDate = null;
   let creationDate = null;
@@ -80,4 +106,11 @@ function createDateObj(todoText: string): CompletionAndCreation {
     completionDate,
     creationDate,
   };
+}
+
+function createDescription(todoText: string): string {
+  let resultText = todoText.replace(completedPattern, "");
+  resultText = resultText.replace(priorityPattern, "");
+  resultText = resultText.replace(datePattern, "");
+  return resultText.trim();
 }

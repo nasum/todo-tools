@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "lint": "eslint -c .eslintrc.json .",
-    "output:types": "tsc --emitDeclarationOnly"
+    "output:types": "tsc --emitDeclarationOnly",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",

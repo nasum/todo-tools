@@ -13,8 +13,14 @@
     "test": "jest",
     "lint": "eslint -c .eslintrc.json .",
     "output:types": "tsc --emitDeclarationOnly",
+    "commit": "git-cz",
     "release": "standard-version"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",

@@ -8,13 +8,14 @@ const moduleName = pkg.name.replace(/^@.*\//, '')
 
 export default [
   {
-    input: 'index.ts',
+    input: './src/index.ts',
     output: [
       {
         name: moduleName,
         file: pkg.browser,
         format: 'iife',
         sourcemap: 'inline',
+        extend: true,
       },
     ],
     external: [...Object.keys(pkg.devDependencies || {})],
@@ -25,7 +26,7 @@ export default [
     ],
   },
   {
-    input: 'index.ts',
+    input: './src/index.ts',
     output: [
       {
         file: pkg.main,

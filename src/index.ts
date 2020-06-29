@@ -38,7 +38,7 @@ export class ToDoText {
   creationDate: Date | null
   description: Description
 
-  private constructor(
+  constructor(
     rawText: string,
     isCompleted: boolean,
     priority: AtoZ | null,
@@ -52,21 +52,6 @@ export class ToDoText {
     this.completionDate = completionDate
     this.creationDate = creationDate
     this.description = description
-  }
-
-  static parseToDoTxt(todoText: string): ToDoText {
-    const isCompleted = createCompleted(todoText)
-    const priority = createPriority(todoText)
-    const dateObj = createDateObj(todoText)
-    const description = new Description(createDescription(todoText))
-    return new ToDoText(
-      todoText,
-      isCompleted,
-      priority,
-      dateObj.completionDate,
-      dateObj.creationDate,
-      description
-    )
   }
 }
 
@@ -113,4 +98,19 @@ function createDescription(todoText: string): string {
   resultText = resultText.replace(priorityPattern, '')
   resultText = resultText.replace(datePattern, '')
   return resultText.trim()
+}
+
+export function parseToDoText(todoText: string): ToDoText {
+  const isCompleted = createCompleted(todoText)
+  const priority = createPriority(todoText)
+  const dateObj = createDateObj(todoText)
+  const description = new Description(createDescription(todoText))
+  return new ToDoText(
+    todoText,
+    isCompleted,
+    priority,
+    dateObj.completionDate,
+    dateObj.creationDate,
+    description
+  )
 }

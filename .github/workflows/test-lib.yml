@@ -1,6 +1,5 @@
 name: test lib
-on:
-  push
+on: push
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,5 +20,5 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: test lib
-        run: yarn workspaces run test
+      - name: test
+        run: yarn run test

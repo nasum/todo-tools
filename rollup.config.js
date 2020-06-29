@@ -8,7 +8,7 @@ const moduleName = pkg.name.replace(/^@.*\//, '')
 
 export default [
   {
-    input: 'src/index.ts',
+    input: 'index.ts',
     output: [
       {
         name: moduleName,
@@ -25,7 +25,7 @@ export default [
     ],
   },
   {
-    input: 'src/index.ts',
+    input: 'index.ts',
     output: [
       {
         file: pkg.main,

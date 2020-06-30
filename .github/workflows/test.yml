@@ -1,5 +1,7 @@
-name: test lib
-on: [push, pull_request]
+name: test
+on:
+  pull_request:
+    types: [opened, synchronize]
 jobs:
   test:
     runs-on: ubuntu-latest

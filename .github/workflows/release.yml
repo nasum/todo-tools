@@ -33,9 +33,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-      - name: Get package-version
-        id: package-version
-        run: echo "::set-output name=package_version::v$(node -p "require('./package.json').version")"
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
         with:
@@ -48,8 +45,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ steps.package-version.outputs.package_version }}
-          release_name: Release ${{ steps.package-version.outputs.package_version }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
       - name: deploy github package registry
         run: yarn workspace @nasum/todo-core publish 
         env:

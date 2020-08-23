@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: build node package
-        run: yarn workspace @nasum/todo-core build
+        run: yarn workspace @nasum/todo-core-lib build
       - name: Github config
         run: |
           git config --local user.email "action@github.com"
@@ -56,6 +56,6 @@ jobs:
           tag_name: ${{ steps.set_date.outputs.date }}
           release_name: Release ${{ steps.set_date.outputs.date }}
       - name: deploy github package registry
-        run: yarn workspace @nasum/todo-core publish 
+        run: yarn workspace @nasum/todo-core-lib publish 
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

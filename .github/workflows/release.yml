@@ -33,8 +33,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-      - name: Version increment
-        run: yarn workspace @nasum/todo-txt-core release
       - name: Get package-version
         id: package-version
         run: echo "::set-output name=package_version::v$(node -p "require('./package.json').version")"

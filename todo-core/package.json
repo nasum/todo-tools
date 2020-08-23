@@ -20,6 +20,7 @@
     "dist",
     "src"
   ],
+  "repository": "ssh://git@github.com/nasum/todo.git",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },

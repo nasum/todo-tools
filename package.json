@@ -5,5 +5,5 @@
   "author": "nasum <tomato.wonder.life@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["todo-txt-core"]
+  "workspaces": ["todo-core"]
 }

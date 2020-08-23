@@ -1,6 +1,6 @@
 {
   "name": "@nasum/todo-txt-core",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "module": "dist/index.es.js",

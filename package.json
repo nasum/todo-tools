@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "ssh://git@github.com/nasum/todo.git",
+  "repository": "ssh://git@github.com/nasum/todo-tools.git",
   "author": "nasum <tomato.wonder.life@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["todo-core"]
+  "workspaces": ["todo-core-lib"]
 }

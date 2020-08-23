@@ -28,13 +28,13 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: build node package
-        run: yarn build
+        run: yarn workspace @nasum/todo-txt-core build
       - name: Github config
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
       - name: Version increment
-        run: yarn release
+        run: yarn workspace @nasum/todo-txt-core release
       - name: Get package-version
         id: package-version
         run: echo "::set-output name=package_version::v$(node -p "require('./package.json').version")"

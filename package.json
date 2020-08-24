@@ -20,5 +20,5 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "workspaces": ["todo-core-lib"]
+  "workspaces": ["./packages/*"]
 }

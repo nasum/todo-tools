@@ -1,0 +1,8 @@
+{
+  "name": "@nasum/todo-cli",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "main": "index.js",
+  "author": "nasum<tomato.wonder.life@gmail.com>",
+  "license": "MIT"
+}

@@ -1,8 +1,30 @@
 {
   "name": "@nasum/todo-cli",
   "version": "0.0.0",
-  "main": "dist/index.js",
   "main": "index.js",
   "author": "nasum<tomato.wonder.life@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^6.0.0",
+    "ink": "^3.0.4",
+    "react": "^16.13.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-typescript": "^5.0.2",
+    "@types/jest": "^26.0.4",
+    "@typescript-eslint/eslint-plugin": "^3.9.1",
+    "@typescript-eslint/parser": "^3.9.1",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.4.1",
+    "prettier": "^2.0.5",
+    "rollup": "^2.26.4",
+    "standard-version": "^9.0.0",
+    "ts-jest": "^26.2.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2"
+  }
 }

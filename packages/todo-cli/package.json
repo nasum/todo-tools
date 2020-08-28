@@ -5,7 +5,7 @@
   "author": "nasum<tomato.wonder.life@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "commander": "^6.0.0",
+    "commander": "^6.1.0",
     "ink": "^3.0.4",
     "react": "^16.13.1"
   },

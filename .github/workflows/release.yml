@@ -29,6 +29,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: build node package
         run: yarn workspace @nasum/todo-core-lib build
+      - name: output types
+        run: yarn workspace @nasum/todo-core-lib output:types
       - name: Github config
         run: |
           git config --local user.email "action@github.com"

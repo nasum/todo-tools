@@ -11,7 +11,7 @@
     "build": "rollup -c",
     "typecheck": "tsc --noEmit",
     "lint": "eslint -c .eslintrc.json .",
-    "output:types": "tsc --emitDeclarationOnly",
+    "output:types": "tsc ./src/* -d --emitDeclarationOnly --declarationDir ./types",
     "release": "standard-version"
   },
   "files": [

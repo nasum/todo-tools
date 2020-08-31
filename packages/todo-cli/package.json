@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "commander": "^6.1.0",
-    "configstore": "^3.1.5",
+    "configstore": "^5.0.1",
     "ink": "^3.0.4",
     "react": "^16.13.1"
   },

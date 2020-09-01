@@ -10,18 +10,29 @@ export class Description {
     this.body = descriptionTxt
   }
 
-  getProjects() {
+  getProjects(): string[] {
     const projectPattern = new RegExp(/\+\S+/, 'g')
-    return this.body.match(projectPattern)?.map((project) => {
+    const projects = this.body.match(projectPattern)?.map((project) => {
       return project.slice(1)
     })
+    if (projects) {
+      return projects
+    } else {
+      return []
+    }
   }
 
-  getContexts() {
+  getContexts(): string[] {
     const contextPattern = new RegExp(/@\S+/, 'g')
-    return this.body.match(contextPattern)?.map((context) => {
+    const contexts = this.body.match(contextPattern)?.map((context) => {
       return context.slice(1)
     })
+
+    if (contexts) {
+      return contexts
+    } else {
+      return []
+    }
   }
 }
 

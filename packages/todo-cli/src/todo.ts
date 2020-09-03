@@ -14,7 +14,7 @@ program.action(() => {
 })
 
 program.addCommand(makeAddCommand(config))
-program.addCommand(makeLsCommand())
+program.addCommand(makeLsCommand(config))
 
 program.version('0.0.1')
 program.parse(process.argv)

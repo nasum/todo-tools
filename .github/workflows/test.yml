@@ -21,7 +21,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Set Token
-        run: echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" >> ~/.npmrc
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" > ~/.npmrc
+          echo "@nasum:registry=https://npm.pkg.github.com/" >> ~/.npmrc
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: test

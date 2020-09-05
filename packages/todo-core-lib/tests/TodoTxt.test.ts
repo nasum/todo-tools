@@ -7,9 +7,7 @@ describe('complete flag', () => {
   })
 
   test('return completed', () => {
-    const todo = parseToDoText(
-      'x (A) 2020-06-16 write code everyday -coding @pc'
-    )
+    const todo = parseToDoText('x (A) 2020-06-16 write code everyday -coding @pc')
     expect(todo.isCompleted).toBeTruthy()
   })
 })
@@ -28,9 +26,7 @@ describe('priority', () => {
 
 describe('completion and creation', () => {
   test('completion is 2020-06-24 and creation is 2020-06-16', () => {
-    const todo = parseToDoText(
-      'x (A) 2020-06-24 2020-06-16 write code everyday -coding @pc'
-    )
+    const todo = parseToDoText('x (A) 2020-06-24 2020-06-16 write code everyday -coding @pc')
     expect(todo.completionDate).toEqual(new Date('2020-06-24'))
     expect(todo.creationDate).toEqual(new Date('2020-06-16'))
   })
@@ -48,27 +44,28 @@ describe('completion and creation', () => {
 
 describe('description', () => {
   test('return description', () => {
-    const todo = parseToDoText(
-      'x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc'
-    )
+    const todo = parseToDoText('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
     expect(todo.description.body).toEqual('write code everyday +coding @pc')
   })
 
   describe('getProjects', () => {
     test('return projects', () => {
-      const todo = parseToDoText(
-        'x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc'
-      )
+      const todo = parseToDoText('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
       expect(todo.description.getProjects()).toEqual(['coding'])
     })
   })
 
   describe('getContexts', () => {
     test('return contexts', () => {
-      const todo = parseToDoText(
-        'x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc'
-      )
+      const todo = parseToDoText('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
       expect(todo.description.getContexts()).toEqual(['pc'])
     })
+  })
+})
+
+describe('toString', () => {
+  test('return formatted string', () => {
+    const todo = parseToDoText('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
+    expect(todo.toString()).toEqual('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
   })
 })

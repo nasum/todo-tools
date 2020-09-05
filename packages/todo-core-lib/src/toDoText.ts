@@ -10,6 +10,10 @@ export class Description {
     this.body = descriptionTxt
   }
 
+  toString(): string {
+    return this.body
+  }
+
   getProjects(): string[] {
     const projectPattern = new RegExp(/\+\S+/, 'g')
     const projects = this.body.match(projectPattern)?.map((project) => {
@@ -59,4 +63,19 @@ export class ToDoText {
     this.creationDate = creationDate
     this.description = description
   }
+
+  toString(): string {
+    const completeSt = this.isCompleted ? 'x ' : ''
+    const prioritySt = this.priority ? `(${this.priority}) ` : ''
+    const completionDateSt = this.completionDate ? createFormattedDateSt(this.completionDate) + ' ' : ''
+    const creationDateSt = this.creationDate ? createFormattedDateSt(this.creationDate) + ' ' : ''
+    return `${completeSt}${prioritySt}${completionDateSt}${creationDateSt}${this.description.toString()}`
+  }
+}
+
+function createFormattedDateSt(date: Date) {
+  function zeroPadding(num: number): string {
+    return num.toString().padStart(2, '0')
+  }
+  return `${date.getFullYear()}-${zeroPadding(date.getMonth() + 1)}-${zeroPadding(date.getDate())}`
 }

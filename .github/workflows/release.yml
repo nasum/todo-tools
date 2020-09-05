@@ -1,9 +1,8 @@
 name: release
 
 on:
-  push:
-    branches:
-      - release
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   publish-gpr:
@@ -26,7 +25,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Set Token
-        run: echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" >> ~/.npmrc
+        run: |
+            echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" >> ~/.npmrc
+            cat ~/.npmrc
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: build node package

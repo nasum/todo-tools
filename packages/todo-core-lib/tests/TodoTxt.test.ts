@@ -69,3 +69,11 @@ describe('toString', () => {
     expect(todo.toString()).toEqual('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
   })
 })
+
+describe('done', () => {
+  test('get complete task by execute done method', () => {
+    const todo = parseToDoText('(A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
+    todo.done()
+    expect(todo.toString()).toEqual('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
+  })
+})

@@ -71,6 +71,10 @@ export class ToDoText {
     const creationDateSt = this.creationDate ? createFormattedDateSt(this.creationDate) + ' ' : ''
     return `${completeSt}${prioritySt}${completionDateSt}${creationDateSt}${this.description.toString()}`
   }
+
+  done(): void {
+    this.isCompleted = true
+  }
 }
 
 function createFormattedDateSt(date: Date) {

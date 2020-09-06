@@ -10,13 +10,21 @@ export function makeLsCommand(config: Config) {
 
   ls.action(() => {
     if (fs.existsSync(cUtil.todoFilePath())) {
+      const todoList: string[] = []
       const rl = readline.createInterface({
         input: fs.createReadStream(cUtil.todoFilePath()),
       })
       let n = 0
+
       rl.on('line', (line) => {
-        console.log(`${n}: ${line}`)
-        n += 1
+        todoList.push(line)
+      })
+
+      rl.on('close', () => {
+        todoList.sort()
+        for (const todo of todoList) {
+          console.log(todo)
+        }
       })
     } else {
       console.log(`not exist ${cUtil.todoFilePath()}`)

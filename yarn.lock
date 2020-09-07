@@ -627,10 +627,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@nasum/todo-core-lib@0.0.20":
-  version "0.0.20"
-  resolved "https://npm.pkg.github.com/download/@nasum/todo-core-lib/0.0.20/3eef0a7e1cc7fd66b3915edc1f2c32cd1647ea49f816264be9b71100cebe332b#5dc35fc14cf0d60ea2d2888f41d75c988ec7ed57"
-  integrity sha512-XgHarzrmks1/UTxVzMT44vxHymz1qGSC0r/ghafugvxA17fbSCoqFoih8OSvKzXpXPOUQEZdnKoJLnLGiA+rNQ==
+"@nasum/todo-core-lib@0.0.22":
+  version "0.0.22"
+  resolved "https://npm.pkg.github.com/download/@nasum/todo-core-lib/0.0.22/d3b661accc32c73f5983d3f10772c2bd59fca8d56b9bc1c6134e2a6ba8765347#d09b2d9ee7db5b817cc0c716d3e232f5d083fe58"
+  integrity sha512-vcpBmlmx1wS+2WRY/obBq40z4H1W/b7eVIISdRElxBpjt+Zd4PEfTPBzVYr7dgy2L9SJfHB7nKwvhJ9BVmNjjg==
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"

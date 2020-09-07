@@ -8,11 +8,12 @@
     "dev": "ts-node ./src/todo.ts"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "commander": "^6.1.0",
     "configstore": "^5.0.1",
     "ink": "^3.0.5",
     "react": "^16.13.1",
-    "@nasum/todo-core-lib": "0.0.20"
+    "@nasum/todo-core-lib": "0.0.22"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",

@@ -16,7 +16,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "types"
   ],
   "repository": "ssh://git@github.com/nasum/todo-tools.git",
   "publishConfig": {

@@ -1,6 +1,6 @@
 {
   "name": "@nasum/todo-core-lib",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "module": "dist/index.es.js",
@@ -16,7 +16,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "types"
   ],
   "repository": "ssh://git@github.com/nasum/todo-tools.git",
   "publishConfig": {

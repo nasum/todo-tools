@@ -72,8 +72,9 @@ describe('toString', () => {
 
 describe('done', () => {
   test('get complete task by execute done method', () => {
-    const todo = parseToDoText('(A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
+    Date.now = jest.fn(() => Date.parse('2020-09-09'))
+    const todo = parseToDoText('(A) 2020-06-16 write code everyday')
     todo.done()
-    expect(todo.toString()).toEqual('x (A) 2020-06-24 2020-06-16 write code everyday +coding @pc')
+    expect(todo.toString()).toEqual('x (A) 2020-09-09 2020-06-16 write code everyday')
   })
 })

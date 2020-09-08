@@ -74,6 +74,7 @@ export class ToDoText {
 
   done(): void {
     this.isCompleted = true
+    this.completionDate = new Date(Date.now())
   }
 }
 

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.23](https://github.com/nasum/todo-tools/compare/v0.0.22...v0.0.23) (2020-09-08)
+
+
+### Features
+
+* print number and coloring for ls command ([38d7000](https://github.com/nasum/todo-tools/commit/38d7000b0feeee8a3cdd61e49450935da9e476fa))
+
+
+### Bug Fixes
+
+* insert completion date when executing done method ([7c8db4a](https://github.com/nasum/todo-tools/commit/7c8db4a8e79e99e670cb3f5de2fff1e754903de8))
+
 ### [0.0.22](https://github.com/nasum/todo-tools/compare/v0.0.21...v0.0.22) (2020-09-07)
 
 

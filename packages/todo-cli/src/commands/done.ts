@@ -3,6 +3,7 @@ import readline from 'readline'
 import { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
+import { parseToDoText } from '@nasum/todo-core-lib'
 
 export function makeDoneCommand(config: Config) {
   const done = createCommand('done')
@@ -21,7 +22,9 @@ export function makeDoneCommand(config: Config) {
           text += line
           text += '\n'
         } else {
-          text += `x ${line}`
+          const todoText = parseToDoText(line)
+          todoText.done()
+          text += todoText.toString()
           text += '\n'
         }
         n += 1

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/nasum/todo-tools/compare/v0.0.23...v0.0.24) (2020-09-10)
+
+
+### Features
+
+* implements getCompletionDateString and getCreationDateString ([b6388e0](https://github.com/nasum/todo-tools/commit/b6388e056369fee792d727dfeabbf022f5a99dfb))
+
+
+### Bug Fixes
+
+* modified done command to use done method ([7b0a3d3](https://github.com/nasum/todo-tools/commit/7b0a3d35d44d1320c21429ca0c8a7b3196a7b5b5))
+
 ### [0.0.23](https://github.com/nasum/todo-tools/compare/v0.0.22...v0.0.23) (2020-09-08)
 
 

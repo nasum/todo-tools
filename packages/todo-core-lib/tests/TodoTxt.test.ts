@@ -78,3 +78,27 @@ describe('done', () => {
     expect(todo.toString()).toEqual('x (A) 2020-09-09 2020-06-16 write code everyday')
   })
 })
+
+describe('getCompletionDateString', () => {
+  test('return empty string when not completed todo', () => {
+    const todo = parseToDoText('(A) 2020-06-16 write code everyday')
+    expect(todo.getCompletionDateString()).toEqual('')
+  })
+
+  test('return completion date string when completed todo', () => {
+    const todo = parseToDoText('x (A) 2020-09-10 2020-06-16 write code everyday')
+    expect(todo.getCompletionDateString()).toEqual('2020-09-10')
+  })
+})
+
+describe('getCreationDateString', () => {
+  test('return empty string', () => {
+    const todo = parseToDoText('(A) write code everyday')
+    expect(todo.getCreationDateString()).toEqual('')
+  })
+
+  test('return creation date string', () => {
+    const todo = parseToDoText('(A) 2020-06-16 write code everyday')
+    expect(todo.getCreationDateString()).toEqual('2020-06-16')
+  })
+})

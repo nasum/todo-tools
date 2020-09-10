@@ -76,6 +76,22 @@ export class ToDoText {
     this.isCompleted = true
     this.completionDate = new Date(Date.now())
   }
+
+  getCompletionDateString(): string {
+    if (this.completionDate) {
+      return createFormattedDateSt(this.completionDate)
+    } else {
+      return ''
+    }
+  }
+
+  getCreationDateString(): string {
+    if (this.creationDate) {
+      return createFormattedDateSt(this.creationDate)
+    } else {
+      return ''
+    }
+  }
 }
 
 function createFormattedDateSt(date: Date) {

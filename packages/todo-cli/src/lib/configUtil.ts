@@ -16,4 +16,8 @@ export class ConfigUtil {
   todoFilePath = () => {
     return `${this.todoDirPath()}/${this.config.todoFileName}`
   }
+
+  archiveDirPath = () => {
+    return `${this.todoDirPath()}/${this.config.archiveFileDir}`
+  }
 }

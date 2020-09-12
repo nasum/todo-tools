@@ -7,19 +7,29 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "bootstrap": "lerna bootstrap",
+    "versionup": "lerna version --conventional-commits",
+    "versionup:patch": "lerna version patch --conventional-commits",
+    "versionup:minor": "lerna version minor --conventional-commits",
+    "versionup:major": "lerna version major --conventional-commits",
+    "release": "lerna publish from-package"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.2",
     "commitizen": "^4.2.1",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^4.3.0"
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "workspaces": ["./packages/*"]
+  "workspaces": [
+    "./packages/*"
+  ],
+  "name": "todo-txt-core"
 }

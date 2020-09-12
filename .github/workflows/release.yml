@@ -60,6 +60,6 @@ jobs:
           tag_name: ${{ steps.set_date.outputs.date }}
           release_name: Release ${{ steps.set_date.outputs.date }}
       - name: deploy github package registry
-        run: yarn workspace @nasum/todo-core-lib publish 
+        run: yarn run release
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

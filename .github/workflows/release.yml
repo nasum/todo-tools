@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - release
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   publish-gpr:
@@ -13,6 +15,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Github config
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -23,26 +33,12 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Set Token
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" > ~/.npmrc
-          echo "@nasum:registry=https://npm.pkg.github.com/" >> ~/.npmrc
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: build node package
         run: yarn workspace @nasum/todo-core-lib build
       - name: output types
         run: yarn workspace @nasum/todo-core-lib output:types
-      - name: Github config
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-      - name: GitHub Push
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          branch: release
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: true
       - name: set date
         id: set_date
         env:
@@ -59,7 +55,9 @@ jobs:
         with:
           tag_name: ${{ steps.set_date.outputs.date }}
           release_name: Release ${{ steps.set_date.outputs.date }}
-      - name: deploy github package registry
-        run: yarn run release
+      - name: Publish
+        run: |
+          yarn lerna publish from-package --yes
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

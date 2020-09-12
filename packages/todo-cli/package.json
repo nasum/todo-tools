@@ -7,6 +7,10 @@
   "scripts": {
     "dev": "ts-node ./src/todo.ts"
   },
+  "repository": "ssh://git@github.com/nasum/todo-tools.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "dependencies": {
     "@nasum/todo-core-lib": "^0.1.0",
     "chalk": "^4.1.0",

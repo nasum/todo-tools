@@ -12,7 +12,7 @@ export function makeLsCommand(config: Config) {
   const ls = createCommand('ls')
   const cUtil = new ConfigUtil(config)
 
-  ls.action((_, findWords: string[] = []) => {
+  ls.description('show todo list').action((_, findWords: string[] = []) => {
     if (fs.existsSync(cUtil.todoFilePath())) {
       const todoList: ToDoList = []
       const rl = readline.createInterface({

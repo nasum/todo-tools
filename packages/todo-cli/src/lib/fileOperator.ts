@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function writeFile(filePath: string, text: string) {
+export function writeFile(filePath: string, text: string): void {
   fs.open(filePath, 'w', (err, fd) => {
     if (err) throw err
     fs.writeFile(fd, text, (err) => {

@@ -1,11 +1,11 @@
 import fs from 'fs'
 import readline from 'readline'
-import { createCommand } from 'commander'
+import commander, { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 import { writeFile } from '../lib/fileOperator'
 
-export function makeRmCommand(config: Config) {
+export function makeRmCommand(config: Config): commander.Command {
   const rm = createCommand('rm <todo number>')
   const cUtil = new ConfigUtil(config)
 

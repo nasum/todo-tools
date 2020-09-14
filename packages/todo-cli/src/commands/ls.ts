@@ -1,6 +1,6 @@
 import fs from 'fs'
 import readline from 'readline'
-import { createCommand } from 'commander'
+import commander, { createCommand } from 'commander'
 import chalk from 'chalk'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
@@ -8,7 +8,7 @@ import { parseToDoText } from '@nasum/todo-core-lib'
 
 type ToDoList = [string, number][]
 
-export function makeLsCommand(config: Config) {
+export function makeLsCommand(config: Config): commander.Command {
   const ls = createCommand('ls')
   const cUtil = new ConfigUtil(config)
 
@@ -35,7 +35,7 @@ export function makeLsCommand(config: Config) {
   return ls
 }
 
-function displayTodo(todoList: ToDoList, findWords: string[]) {
+function displayTodo(todoList: ToDoList, findWords: string[]): void {
   console.log('findWords', findWords)
   todoList.sort()
   const re = new RegExp(findWords.join('|'))

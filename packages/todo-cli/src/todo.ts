@@ -6,9 +6,9 @@ import { makeLsCommand } from './commands/ls'
 import { makeRmCommand } from './commands/rm'
 import { makeDoneCommand } from './commands/done'
 import { makeArchiveCommand } from './commands/archive'
+import { name } from '../package.json'
 
-const packageJson = require('../package.json')
-const config: Config = new Configstore(packageJson.name, DefaultConfig).all
+const config: Config = new Configstore(name, DefaultConfig).all
 
 const program = createCommand()
 

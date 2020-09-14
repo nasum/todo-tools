@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import readline from 'readline'
-import { createCommand } from 'commander'
+import commander, { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 import { writeFile } from '../lib/fileOperator'
@@ -11,7 +11,7 @@ type ArchiveMap = {
   [key: string]: string[]
 }
 
-export function makeArchiveCommand(config: Config) {
+export function makeArchiveCommand(config: Config): commander.Command {
   const archive = createCommand('archive')
   const cUtil = new ConfigUtil(config)
 

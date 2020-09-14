@@ -1,12 +1,12 @@
 import fs from 'fs'
 import readline from 'readline'
-import { createCommand } from 'commander'
+import commander, { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 import { writeFile } from '../lib/fileOperator'
 import { parseToDoText } from '@nasum/todo-core-lib'
 
-export function makeDoneCommand(config: Config) {
+export function makeDoneCommand(config: Config): commander.Command {
   const done = createCommand('done <todo number>')
   const cUtil = new ConfigUtil(config)
 

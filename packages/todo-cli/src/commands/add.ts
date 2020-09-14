@@ -1,9 +1,9 @@
 import fs from 'fs'
-import { createCommand } from 'commander'
+import commander, { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 
-export function makeAddCommand(config: Config) {
+export function makeAddCommand(config: Config): commander.Command {
   const add = createCommand('add <todo text>')
   const cUtil = new ConfigUtil(config)
 

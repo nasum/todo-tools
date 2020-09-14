@@ -9,15 +9,15 @@ export class ConfigUtil {
     this.config = config
   }
 
-  todoDirPath = () => {
+  todoDirPath = (): string => {
     return `${os.homedir()}/${this.config.dir}`
   }
 
-  todoFilePath = () => {
+  todoFilePath = (): string => {
     return `${this.todoDirPath()}/${this.config.todoFileName}`
   }
 
-  archiveDirPath = () => {
+  archiveDirPath = (): string => {
     return `${this.todoDirPath()}/${this.config.archiveFileDir}`
   }
 }

@@ -3,13 +3,14 @@ import readline from 'readline'
 import { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
+import { writeFile } from '../lib/fileOperator'
 import { parseToDoText } from '@nasum/todo-core-lib'
 
 export function makeDoneCommand(config: Config) {
-  const done = createCommand('done')
+  const done = createCommand('done <todo number>')
   const cUtil = new ConfigUtil(config)
 
-  done.action((_, target) => {
+  done.description('complete the task').action((_, target) => {
     target = target.map((numberSt: string) => Number(numberSt))
     if (fs.existsSync(cUtil.todoFilePath())) {
       const rl = readline.createInterface({
@@ -31,15 +32,7 @@ export function makeDoneCommand(config: Config) {
       })
 
       rl.on('close', function () {
-        fs.open(cUtil.todoFilePath(), 'w', (err, fd) => {
-          if (err) throw err
-          fs.writeFile(fd, text, (err) => {
-            if (err) throw err
-            fs.close(fd, (err) => {
-              if (err) throw err
-            })
-          })
-        })
+        writeFile(cUtil.todoFilePath(), text)
       })
     } else {
       console.log(`not exist ${cUtil.todoFilePath()}`)

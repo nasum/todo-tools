@@ -2,10 +2,14 @@
   "name": "@nasum/todo-cli",
   "version": "0.1.0",
   "main": "index.js",
+  "bin": {
+    "todo": "dist/todo.js"
+  },
   "author": "nasum<tomato.wonder.life@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node ./src/todo.ts"
+    "dev": "ts-node ./src/todo.ts",
+    "build": "rollup -c"
   },
   "repository": "ssh://git@github.com/nasum/todo-tools.git",
   "publishConfig": {
@@ -23,6 +27,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-typescript": "^6.0.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@types/configstore": "^4.0.0",
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
@@ -33,6 +38,7 @@
     "jest": "^26.4.1",
     "prettier": "^2.1.1",
     "rollup": "^2.26.11",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",

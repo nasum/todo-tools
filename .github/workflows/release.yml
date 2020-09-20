@@ -36,11 +36,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: lerna bootstrap
+        run: yarn lerna bootstrap
       - name: build node package
-        run: lerna run build
+        run: yarn lerna run build
       - name: output types
-        run: lerna run output:types
+        run: yarn lerna run output:types
       - name: set date
         id: set_date
         env:

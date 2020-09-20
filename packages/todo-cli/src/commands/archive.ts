@@ -1,21 +1,21 @@
 import path from 'path'
 import fs from 'fs'
 import readline from 'readline'
-import { createCommand } from 'commander'
+import commander, { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 import { writeFile } from '../lib/fileOperator'
-import { ToDoText, parseToDoText } from '@nasum/todo-core-lib'
+import { parseToDoText } from '@nasum/todo-core-lib'
 
 type ArchiveMap = {
   [key: string]: string[]
 }
 
-export function makeArchiveCommand(config: Config) {
+export function makeArchiveCommand(config: Config): commander.Command {
   const archive = createCommand('archive')
   const cUtil = new ConfigUtil(config)
 
-  archive.action(() => {
+  archive.description('archive todo text').action(() => {
     if (fs.existsSync(cUtil.todoFilePath())) {
       const archiveMap: ArchiveMap = {}
       const rl = readline.createInterface({

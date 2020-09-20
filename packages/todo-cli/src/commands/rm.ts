@@ -1,14 +1,15 @@
 import fs from 'fs'
 import readline from 'readline'
-import { createCommand } from 'commander'
+import commander, { createCommand } from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
+import { writeFile } from '../lib/fileOperator'
 
-export function makeRmCommand(config: Config) {
-  const rm = createCommand('rm')
+export function makeRmCommand(config: Config): commander.Command {
+  const rm = createCommand('rm <todo number>')
   const cUtil = new ConfigUtil(config)
 
-  rm.action((_, target) => {
+  rm.description('remove todo').action((_, target) => {
     target = target.map((numberSt: string) => Number(numberSt))
     if (fs.existsSync(cUtil.todoFilePath())) {
       const rl = readline.createInterface({
@@ -25,15 +26,7 @@ export function makeRmCommand(config: Config) {
       })
 
       rl.on('close', function () {
-        fs.open(cUtil.todoFilePath(), 'w', (err, fd) => {
-          if (err) throw err
-          fs.writeFile(fd, text, (err) => {
-            if (err) throw err
-            fs.close(fd, (err) => {
-              if (err) throw err
-            })
-          })
-        })
+        writeFile(cUtil.todoFilePath(), text)
       })
     } else {
       console.log(`not exist ${cUtil.todoFilePath()}`)

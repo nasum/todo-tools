@@ -36,11 +36,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: lerna bootstrap
       - name: build node package
-        run: yarn workspace @nasum/todo-core-lib build
+        run: lerna run build
       - name: output types
-        run: yarn workspace @nasum/todo-core-lib output:types
+        run: lerna run output:types
       - name: set date
         id: set_date
         env:

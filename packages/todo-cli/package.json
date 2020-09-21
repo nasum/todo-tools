@@ -11,6 +11,9 @@
     "dev": "ts-node ./src/todo.ts",
     "build": "rollup -c"
   },
+  "files": [
+    "dist"
+  ],
   "repository": "ssh://git@github.com/nasum/todo-tools.git",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

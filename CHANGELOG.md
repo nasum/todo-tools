@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/nasum/todo-tools/compare/v0.2.1...v0.2.2) (2020-09-22)
+
+
+### Bug Fixes
+
+* close: [#111](https://github.com/nasum/todo-tools/issues/111) [#117](https://github.com/nasum/todo-tools/issues/117) fix command ([e56ea66](https://github.com/nasum/todo-tools/commit/e56ea668c03b753463e4d1277fe3ef385ac71973))
+
+
+
+
+
 ## [0.2.1](https://github.com/nasum/todo-tools/compare/v0.2.0...v0.2.1) (2020-09-21)
 
 

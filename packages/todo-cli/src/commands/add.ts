@@ -1,20 +1,21 @@
 import fs from 'fs'
-import commander, { createCommand } from 'commander'
+import commander from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 
 export function makeAddCommand(config: Config): commander.Command {
-  const add = createCommand('add <todo text>')
   const cUtil = new ConfigUtil(config)
-
-  add.description('add todo text').action((_, textArray) => {
-    const todoText = textArray.join(' ') + '\n'
-    if (fs.existsSync(cUtil.todoFilePath())) {
-      fs.appendFileSync(cUtil.todoFilePath(), todoText)
-    } else {
-      fs.mkdirSync(cUtil.todoDirPath(), { recursive: true })
-      fs.writeFileSync(cUtil.todoFilePath(), todoText)
-    }
-  })
+  const add = commander
+    .command('add <todo text>')
+    .description('add todo text')
+    .action((todoText: string) => {
+      todoText = todoText + '\n'
+      if (fs.existsSync(cUtil.todoFilePath())) {
+        fs.appendFileSync(cUtil.todoFilePath(), todoText)
+      } else {
+        fs.mkdirSync(cUtil.todoDirPath(), { recursive: true })
+        fs.writeFileSync(cUtil.todoFilePath(), todoText)
+      }
+    })
   return add
 }

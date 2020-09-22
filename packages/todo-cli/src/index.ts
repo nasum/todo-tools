@@ -6,11 +6,11 @@ import { makeLsCommand } from './commands/ls'
 import { makeRmCommand } from './commands/rm'
 import { makeDoneCommand } from './commands/done'
 import { makeArchiveCommand } from './commands/archive'
-import { name } from '../package.json'
+import { name, version } from '../package.json'
 
 const config: Config = new Configstore(name, DefaultConfig).all
 
-const program = createCommand()
+const program = createCommand('todo')
 
 program.action(() => {
   console.log('todo')
@@ -22,5 +22,5 @@ program.addCommand(makeRmCommand(config))
 program.addCommand(makeDoneCommand(config))
 program.addCommand(makeArchiveCommand(config))
 
-program.version('0.0.1')
+program.version(version)
 program.parse(process.argv)

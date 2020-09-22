@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import readline from 'readline'
-import commander, { createCommand } from 'commander'
+import commander from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 import { writeFile } from '../lib/fileOperator'
@@ -12,38 +12,39 @@ type ArchiveMap = {
 }
 
 export function makeArchiveCommand(config: Config): commander.Command {
-  const archive = createCommand('archive')
   const cUtil = new ConfigUtil(config)
+  const archive = commander
+    .command('archive')
+    .description('archive todo text')
+    .action(() => {
+      if (fs.existsSync(cUtil.todoFilePath())) {
+        const archiveMap: ArchiveMap = {}
+        const rl = readline.createInterface({
+          input: fs.createReadStream(cUtil.todoFilePath()),
+        })
+        let text = ''
 
-  archive.description('archive todo text').action(() => {
-    if (fs.existsSync(cUtil.todoFilePath())) {
-      const archiveMap: ArchiveMap = {}
-      const rl = readline.createInterface({
-        input: fs.createReadStream(cUtil.todoFilePath()),
-      })
-      let text = ''
+        rl.on('line', function (line) {
+          const todoText = parseToDoText(line)
+          if (todoText.isCompleted && todoText.completionDate) {
+            const archiveArray = archiveMap[todoText.getCreationDateString()] || []
+            archiveArray.push(line)
 
-      rl.on('line', function (line) {
-        const todoText = parseToDoText(line)
-        if (todoText.isCompleted && todoText.completionDate) {
-          const archiveArray = archiveMap[todoText.getCreationDateString()] || []
-          archiveArray.push(line)
+            archiveMap[todoText.getCompletionDateString()] = archiveArray
+          } else {
+            text += line
+            text += '\n'
+          }
+        })
 
-          archiveMap[todoText.getCompletionDateString()] = archiveArray
-        } else {
-          text += line
-          text += '\n'
-        }
-      })
-
-      rl.on('close', function () {
-        createArchive(archiveMap, cUtil.archiveDirPath())
-        writeFile(cUtil.todoFilePath(), text)
-      })
-    } else {
-      console.log(`not exist ${cUtil.todoFilePath()}`)
-    }
-  })
+        rl.on('close', function () {
+          createArchive(archiveMap, cUtil.archiveDirPath())
+          writeFile(cUtil.todoFilePath(), text)
+        })
+      } else {
+        console.log(`not exist ${cUtil.todoFilePath()}`)
+      }
+    })
   return archive
 }
 

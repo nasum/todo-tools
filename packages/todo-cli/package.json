@@ -8,7 +8,7 @@
   "author": "nasum<tomato.wonder.life@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node ./src/todo.ts",
+    "dev": "ts-node ./src/index.ts",
     "build": "rollup -c"
   },
   "files": [

@@ -6,6 +6,7 @@ import { makeLsCommand } from './commands/ls'
 import { makeRmCommand } from './commands/rm'
 import { makeDoneCommand } from './commands/done'
 import { makeArchiveCommand } from './commands/archive'
+import { makeEditCommand } from './commands/edit'
 import { name, version } from '../package.json'
 
 const config: Config = new Configstore(name, DefaultConfig).all
@@ -21,6 +22,7 @@ program.addCommand(makeLsCommand(config))
 program.addCommand(makeRmCommand(config))
 program.addCommand(makeDoneCommand(config))
 program.addCommand(makeArchiveCommand(config))
+program.addCommand(makeEditCommand(config))
 
 program.version(version)
 program.parse(process.argv)

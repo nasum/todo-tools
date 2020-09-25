@@ -6,7 +6,7 @@ import { ConfigUtil } from '../lib/configUtil'
 export function makeAddCommand(config: Config): commander.Command {
   const cUtil = new ConfigUtil(config)
   const add = commander
-    .command('add <todo text>')
+    .command('add <todotext>')
     .description('add todo text')
     .action((todoText: string) => {
       todoText = todoText + '\n'

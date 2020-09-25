@@ -17,21 +17,43 @@ export function makeRmCommand(config: Config): commander.Command {
           input: fs.createReadStream(cUtil.todoFilePath()),
         })
         let text = ''
+        let deleteText = ''
         let n = 0
         rl.on('line', function (line) {
           if (target.indexOf(n) < 0) {
             text += line
             text += '\n'
+          } else {
+            deleteText += line
+            deleteText += '\n'
           }
           n += 1
         })
 
-        rl.on('close', function () {
-          writeFile(cUtil.todoFilePath(), text)
+        rl.on('close', async () => {
+          console.log(deleteText)
+          const answer = await question('Do you really want to delet this? [y/N]:')
+          if (answer.match(/^y(es)?$/i)) {
+            writeFile(cUtil.todoFilePath(), text)
+          }
         })
       } else {
         console.log(`not exist ${cUtil.todoFilePath()}`)
       }
     })
   return rm
+}
+
+function question(question: string): Promise<string> {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  })
+
+  return new Promise((resolve, _) => {
+    rl.question(question, (answer: string) => {
+      resolve(answer)
+      rl.close()
+    })
+  })
 }

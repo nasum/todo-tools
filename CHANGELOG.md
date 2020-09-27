@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/nasum/todo-tools/compare/v0.3.0...v0.4.0) (2020-09-27)
+
+
+### Features
+
+* add config command ([ff6156e](https://github.com/nasum/todo-tools/commit/ff6156e98906213be7218c88c0e66e8293f34811))
+* add prompt to rm command ([609d48e](https://github.com/nasum/todo-tools/commit/609d48e0adcc45418f91c300cc6fe5a978fc7831))
+
+
+
+
+
 # [0.3.0](https://github.com/nasum/todo-tools/compare/v0.2.2...v0.3.0) (2020-09-25)
 
 

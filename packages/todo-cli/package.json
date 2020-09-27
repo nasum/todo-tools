@@ -1,6 +1,6 @@
 {
   "name": "@nasum/todo-cli",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "index.js",
   "bin": {
     "todo": "dist/todo.js"
@@ -19,7 +19,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
-    "@nasum/todo-core-lib": "^0.3.0",
+    "@nasum/todo-core-lib": "^0.4.0",
     "chalk": "^4.1.0",
     "commander": "^6.1.0",
     "configstore": "^5.0.1",

@@ -41,22 +41,6 @@ jobs:
         run: yarn lerna run build
       - name: output types
         run: yarn lerna run output:types
-      - name: set date
-        id: set_date
-        env:
-          TZ: 'Asia/Tokyo'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          DATE=`date +"%Y%m%d%H%M"` 
-          echo ::set-output name=date::$DATE
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.set_date.outputs.date }}
-          release_name: Release ${{ steps.set_date.outputs.date }}
       - name: Publish
         run: |
           yarn lerna publish from-package --yes

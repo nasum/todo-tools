@@ -11,3 +11,16 @@ export function writeFile(filePath: string, text: string): void {
     })
   })
 }
+
+export class ToDoTextFileOperator {
+  filePath: string
+
+  constructor(filePath: string) {
+    this.filePath = filePath
+    if (!fs.existsSync(this.filePath)) fs.mkdirSync(this.filePath, { recursive: true })
+  }
+
+  append(text: string): void {
+    fs.appendFileSync(this.filePath, text + '\n')
+  }
+}

@@ -13,6 +13,8 @@ export function writeFile(filePath: string, text: string): void {
   })
 }
 
+export type ToDoList = [string, number][]
+
 export class ToDoTextFileOperator {
   filePath: string
 
@@ -71,6 +73,29 @@ export class ToDoTextFileOperator {
       rl.on('close', () => {
         writeFile(this.filePath, text)
         resolve()
+      })
+    })
+  }
+
+  getToDoList(): Promise<ToDoList> {
+    return new Promise((resolve, reject) => {
+      const todoList: ToDoList = []
+      const rl = readline.createInterface({
+        input: fs.createReadStream(this.filePath),
+      })
+      let n = 0
+
+      rl.on('line', (line) => {
+        todoList.push([line, n])
+        n++
+      })
+
+      rl.on('SIGINT', () => {
+        reject()
+      })
+
+      rl.on('close', () => {
+        resolve(todoList)
       })
     })
   }

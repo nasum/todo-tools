@@ -1,37 +1,21 @@
-import fs from 'fs'
-import readline from 'readline'
 import commander from 'commander'
 import chalk from 'chalk'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
 import { parseToDoText } from '@nasum/todo-core-lib'
-
-type ToDoList = [string, number][]
+import { ToDoTextFileOperator, ToDoList } from '../lib/fileOperator'
 
 export function makeLsCommand(config: Config): commander.Command {
   const cUtil = new ConfigUtil(config)
+  const operator = new ToDoTextFileOperator(cUtil.todoFilePath())
+
   const ls = commander
     .command('ls [words...]')
     .description('show todo list')
     .action((words: string[] = []) => {
-      if (fs.existsSync(cUtil.todoFilePath())) {
-        const todoList: ToDoList = []
-        const rl = readline.createInterface({
-          input: fs.createReadStream(cUtil.todoFilePath()),
-        })
-        let n = 0
-
-        rl.on('line', (line) => {
-          todoList.push([line, n])
-          n++
-        })
-
-        rl.on('close', () => {
-          displayTodo(todoList, words)
-        })
-      } else {
-        console.log(`not exist ${cUtil.todoFilePath()}`)
-      }
+      operator.getToDoList().then((todoList) => {
+        displayTodo(todoList, words)
+      })
     })
   return ls
 }

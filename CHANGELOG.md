@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/nasum/todo-tools/compare/v0.4.0...v0.5.0) (2020-10-07)
+
+
+### Features
+
+* display todo list after adding / deleting todo ([82dad11](https://github.com/nasum/todo-tools/commit/82dad11405fe4806157751a82251a5834ca7d621))
+
+
+
+
+
 # [0.4.0](https://github.com/nasum/todo-tools/compare/v0.3.0...v0.4.0) (2020-09-27)
 
 

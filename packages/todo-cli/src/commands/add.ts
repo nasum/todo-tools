@@ -1,21 +1,20 @@
-import fs from 'fs'
 import commander from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
+import { displayTodo } from '../lib/displayTerminal'
+import { ToDoTextFileOperator } from '../lib/fileOperator'
 
 export function makeAddCommand(config: Config): commander.Command {
   const cUtil = new ConfigUtil(config)
+  const operator = new ToDoTextFileOperator(cUtil.todoFilePath())
+
   const add = commander
     .command('add <todotext>')
     .description('add todo text')
-    .action((todoText: string) => {
-      todoText = todoText + '\n'
-      if (fs.existsSync(cUtil.todoFilePath())) {
-        fs.appendFileSync(cUtil.todoFilePath(), todoText)
-      } else {
-        fs.mkdirSync(cUtil.todoDirPath(), { recursive: true })
-        fs.writeFileSync(cUtil.todoFilePath(), todoText)
-      }
+    .action(async (todoText: string) => {
+      operator.append(todoText)
+      const todoList = await operator.getToDoList()
+      displayTodo(todoList)
     })
   return add
 }

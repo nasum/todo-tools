@@ -2,6 +2,7 @@ import readline from 'readline'
 import commander from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'
+import { displayTodo } from '../lib/displayTerminal'
 import { ToDoTextFileOperator } from '../lib/fileOperator'
 
 export function makeRmCommand(config: Config): commander.Command {
@@ -11,20 +12,16 @@ export function makeRmCommand(config: Config): commander.Command {
   const rm = commander
     .command('rm <number...>')
     .description('remove todo')
-    .action((numberArray: string[]) => {
+    .action(async (numberArray: string[]) => {
       const target = numberArray.map((numberSt: string) => Number(numberSt))
-
-      operator
-        .findLine(target)
-        .then((findLine) => {
-          console.log(findLine)
-          return question('Do you really want to delete this? [y/N]:')
-        })
-        .then((answer) => {
-          if (answer.match(/^y(es)?$/i)) {
-            operator.rmLine(target)
-          }
-        })
+      const findLine = await operator.findLine(target)
+      console.log(findLine)
+      const answer = await question('Do you really want to delete this? [y/N]:')
+      if (answer.match(/^y(es)?$/i)) {
+        await operator.rmLine(target)
+      }
+      const todoList = await operator.getToDoList()
+      displayTodo(todoList)
     })
   return rm
 }

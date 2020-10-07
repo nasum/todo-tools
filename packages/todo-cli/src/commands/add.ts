@@ -1,4 +1,3 @@
-import fs from 'fs'
 import commander from 'commander'
 import { Config } from '../config'
 import { ConfigUtil } from '../lib/configUtil'

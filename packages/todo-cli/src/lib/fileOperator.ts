@@ -1,5 +1,6 @@
 import fs from 'fs'
 import readline from 'readline'
+import { parseToDoText } from '@nasum/todo-core-lib'
 
 export function writeFile(filePath: string, text: string): void {
   fs.open(filePath, 'w', (err, fd) => {
@@ -62,6 +63,37 @@ export class ToDoTextFileOperator {
       rl.on('line', (line) => {
         if (targetList.indexOf(n) < 0) {
           text += `${line}\n`
+        }
+        n += 1
+      })
+
+      rl.on('SIGINT', () => {
+        reject()
+      })
+
+      rl.on('close', () => {
+        writeFile(this.filePath, text)
+        resolve()
+      })
+    })
+  }
+
+  doneLine(targetList: Array<number>): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const rl = readline.createInterface({
+        input: fs.createReadStream(this.filePath),
+      })
+      let text = ''
+      let n = 0
+      rl.on('line', (line) => {
+        if (targetList.indexOf(n) < 0) {
+          text += line
+          text += '\n'
+        } else {
+          const todoText = parseToDoText(line)
+          todoText.done()
+          text += todoText.toString()
+          text += '\n'
         }
         n += 1
       })

@@ -12,10 +12,9 @@ export function makeLsCommand(config: Config): commander.Command {
   const ls = commander
     .command('ls [words...]')
     .description('show todo list')
-    .action((words: string[] = []) => {
-      operator.getToDoList().then((todoList) => {
-        displayTodo(todoList, words)
-      })
+    .action(async (words: string[] = []) => {
+      const todoList = await operator.getToDoList()
+      displayTodo(todoList, words)
     })
   return ls
 }

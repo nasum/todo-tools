@@ -7,7 +7,7 @@ import { ToDoTextFileOperator } from '../lib/fileOperator'
 
 export function makeLsCommand(config: Config): commander.Command {
   const cUtil = new ConfigUtil(config)
-  const operator = new ToDoTextFileOperator(cUtil.todoFilePath())
+  const operator = new ToDoTextFileOperator(cUtil)
 
   const ls = commander
     .command('ls [words...]')

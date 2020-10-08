@@ -6,7 +6,7 @@ import { ToDoTextFileOperator } from '../lib/fileOperator'
 
 export function makeAddCommand(config: Config): commander.Command {
   const cUtil = new ConfigUtil(config)
-  const operator = new ToDoTextFileOperator(cUtil.todoFilePath())
+  const operator = new ToDoTextFileOperator(cUtil)
 
   const add = commander
     .command('add <todotext>')

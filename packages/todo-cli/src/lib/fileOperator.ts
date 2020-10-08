@@ -1,26 +1,22 @@
+import path from 'path'
 import fs from 'fs'
 import readline from 'readline'
+import { ConfigUtil } from './configUtil'
 import { parseToDoText } from '@nasum/todo-core-lib'
-
-export function writeFile(filePath: string, text: string): void {
-  fs.open(filePath, 'w', (err, fd) => {
-    if (err) throw err
-    fs.writeFile(fd, text, (err) => {
-      if (err) throw err
-      fs.close(fd, (err) => {
-        if (err) throw err
-      })
-    })
-  })
-}
 
 export type ToDoList = [string, number][]
 
+type ArchiveMap = {
+  [key: string]: string[]
+}
+
 export class ToDoTextFileOperator {
   filePath: string
+  archivePath: string
 
-  constructor(filePath: string) {
-    this.filePath = filePath
+  constructor(config: ConfigUtil) {
+    this.filePath = config.todoFilePath()
+    this.archivePath = config.archiveDirPath()
     if (!fs.existsSync(this.filePath)) fs.mkdirSync(this.filePath, { recursive: true })
   }
 
@@ -72,7 +68,7 @@ export class ToDoTextFileOperator {
       })
 
       rl.on('close', () => {
-        writeFile(this.filePath, text)
+        this.writeFile(this.filePath, text)
         resolve()
       })
     })
@@ -103,7 +99,7 @@ export class ToDoTextFileOperator {
       })
 
       rl.on('close', () => {
-        writeFile(this.filePath, text)
+        this.writeFile(this.filePath, text)
         resolve()
       })
     })
@@ -128,6 +124,64 @@ export class ToDoTextFileOperator {
 
       rl.on('close', () => {
         resolve(todoList)
+      })
+    })
+  }
+
+  archive(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const archiveMap: ArchiveMap = {}
+      const rl = readline.createInterface({
+        input: fs.createReadStream(this.filePath),
+      })
+      let text = ''
+
+      rl.on('line', function (line) {
+        const todoText = parseToDoText(line)
+        if (todoText.isCompleted && todoText.completionDate) {
+          const archiveArray = archiveMap[todoText.getCreationDateString()] || []
+          archiveArray.push(line)
+
+          archiveMap[todoText.getCompletionDateString()] = archiveArray
+        } else {
+          text += line
+          text += '\n'
+        }
+      })
+
+      rl.on('SIGINT', () => {
+        reject()
+      })
+
+      rl.on('close', () => {
+        this.createArchive(archiveMap, this.archivePath)
+        this.writeFile(this.filePath, text)
+        resolve()
+      })
+    })
+  }
+
+  private createArchive(archiveMap: ArchiveMap, archiveDirPath: string) {
+    for (const date of Object.keys(archiveMap)) {
+      const archivePath = path.join(archiveDirPath, date + '.txt')
+      if (!fs.existsSync(archivePath)) {
+        fs.mkdirSync(archiveDirPath, { recursive: true })
+        fs.writeFileSync(archivePath, '')
+      }
+      for (const archiveText of archiveMap[date]) {
+        fs.appendFileSync(archivePath, archiveText + '\n')
+      }
+    }
+  }
+
+  private writeFile(filePath: string, text: string): void {
+    fs.open(filePath, 'w', (err, fd) => {
+      if (err) throw err
+      fs.writeFile(fd, text, (err) => {
+        if (err) throw err
+        fs.close(fd, (err) => {
+          if (err) throw err
+        })
       })
     })
   }

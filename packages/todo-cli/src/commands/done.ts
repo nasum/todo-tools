@@ -6,7 +6,7 @@ import { ToDoTextFileOperator } from '../lib/fileOperator'
 
 export function makeDoneCommand(config: Config): commander.Command {
   const cUtil = new ConfigUtil(config)
-  const operator = new ToDoTextFileOperator(cUtil.todoFilePath())
+  const operator = new ToDoTextFileOperator(cUtil)
 
   const done = commander
     .command('done <number...>')

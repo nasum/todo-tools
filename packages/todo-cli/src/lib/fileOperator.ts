@@ -20,11 +20,11 @@ export class ToDoTextFileOperator {
     if (!fs.existsSync(this.filePath)) fs.mkdirSync(this.filePath, { recursive: true })
   }
 
-  append(text: string): void {
+  addToDo(text: string): void {
     fs.appendFileSync(this.filePath, text + '\n')
   }
 
-  findLine(targetList: Array<number>): Promise<string> {
+  findToDo(targetList: Array<number>): Promise<string> {
     return new Promise((resolve, reject) => {
       const rl = readline.createInterface({
         input: fs.createReadStream(this.filePath),
@@ -49,7 +49,7 @@ export class ToDoTextFileOperator {
     })
   }
 
-  rmLine(targetList: Array<number>): Promise<void> {
+  rmToDo(targetList: Array<number>): Promise<void> {
     return new Promise((resolve, reject) => {
       const rl = readline.createInterface({
         input: fs.createReadStream(this.filePath),
@@ -74,7 +74,7 @@ export class ToDoTextFileOperator {
     })
   }
 
-  doneLine(targetList: Array<number>): Promise<void> {
+  doneToDo(targetList: Array<number>): Promise<void> {
     return new Promise((resolve, reject) => {
       const rl = readline.createInterface({
         input: fs.createReadStream(this.filePath),
@@ -161,7 +161,7 @@ export class ToDoTextFileOperator {
     })
   }
 
-  private createArchive(archiveMap: ArchiveMap, archiveDirPath: string) {
+  private createArchive(archiveMap: ArchiveMap, archiveDirPath: string): void {
     for (const date of Object.keys(archiveMap)) {
       const archivePath = path.join(archiveDirPath, date + '.txt')
       if (!fs.existsSync(archivePath)) {

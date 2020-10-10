@@ -12,7 +12,7 @@ export function makeAddCommand(config: Config): commander.Command {
     .command('add <todotext>')
     .description('add todo text')
     .action(async (todoText: string) => {
-      operator.append(todoText)
+      operator.addToDo(todoText)
       const todoList = await operator.getToDoList()
       displayTodo(todoList)
     })

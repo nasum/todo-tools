@@ -10,12 +10,14 @@ import { makeEditCommand } from './commands/edit'
 import { makeConfigCommand } from './commands/config'
 import { name, version } from '../package.json'
 
+import { startTUI } from './ui/tui'
+
 const config: Config = new Configstore(name, DefaultConfig).all
 
 const program = createCommand('todo')
 
 program.action(() => {
-  console.log('todo')
+  startTUI(config)
 })
 
 program.addCommand(makeAddCommand(config))

@@ -4,7 +4,8 @@ import readline from 'readline'
 import { ConfigUtil } from './configUtil'
 import { parseToDoText } from '@nasum/todo-core-lib'
 
-export type ToDoList = [string, number][]
+export type ToDo = [string, number]
+export type ToDoList = ToDo[]
 
 type ArchiveMap = {
   [key: string]: string[]

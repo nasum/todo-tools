@@ -13,7 +13,7 @@ export function makeDoneCommand(config: Config): commander.Command {
     .description('complete the task')
     .action(async (numberStArray: string[]) => {
       const target = numberStArray.map((numberSt: string) => Number(numberSt))
-      await operator.doneLine(target)
+      await operator.doneToDo(target)
       const todoList = await operator.getToDoList()
       displayTodo(todoList)
     })

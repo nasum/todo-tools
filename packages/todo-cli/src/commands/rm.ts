@@ -14,11 +14,11 @@ export function makeRmCommand(config: Config): commander.Command {
     .description('remove todo')
     .action(async (numberArray: string[]) => {
       const target = numberArray.map((numberSt: string) => Number(numberSt))
-      const findLine = await operator.findLine(target)
-      console.log(findLine)
+      const todos = await operator.findToDo(target)
+      console.log(todos)
       const answer = await question('Do you really want to delete this? [y/N]:')
       if (answer.match(/^y(es)?$/i)) {
-        await operator.rmLine(target)
+        await operator.rmToDo(target)
       }
       const todoList = await operator.getToDoList()
       displayTodo(todoList)

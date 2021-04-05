@@ -23,7 +23,7 @@
     "@types/react": "^17.0.0",
     "chalk": "^4.1.0",
     "commander": "^7.0.0",
-    "configstore": "^5.0.1",
+    "configstore": "^6.0.0",
     "ink": "^3.0.5",
     "ink-select-input": "^4.2.0",
     "react": "^17.0.1"

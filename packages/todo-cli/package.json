@@ -33,7 +33,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "@rollup/plugin-typescript": "^8.1.0",
-    "@types/configstore": "^4.0.0",
+    "@types/configstore": "^5.0.1",
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
